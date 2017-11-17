@@ -25,20 +25,24 @@ except FileNotFoundError:	#если файл не найден отрабаты�
 	my_file = open("some.txt", "w", encoding='utf-8')	#создаем файл на запись с кодировкой utf-8	
 	my_file.write(text)	#записываем в файл данные которые спарсили(на строке 22)
 
-for sentence in st.sentences_from_text(text):
-	for word in wt.tokenize(sentence):
-		for p in ma.parse(word):
+for sentence in st.sentences_from_text(text):	#выделяем из текста предложение и бежим по нему
+	for word in wt.tokenize(sentence):	#бежим по словам в выделенном тексте
+		for p in ma.parse(word):	#морфологический разбор слова
 			#print(p, p.tag.grammemes)
-			if "Name" in p.tag and p.score>=0.4:
-				if "masc" in p.tag:
-					if Names["Man"].get(p.normal_form) is None:
-						Names["Man"].update({p.normal_form:1})
-					else:
-						Names["Man"][p.normal_form]+=1
-				if "femn" in p.tag:
-					if Names["female"].get(p.normal_form) is None:
-						Names["female"].update({p.normal_form:1})
-					else:
-						Names["female"][p.normal_form]+=1
+			if "Name" in p.tag and p.score>=0.4:	#если мы считаем, что вероятность больше 0.4
+				# то мы считаем это слово именем
+				if "masc" in p.tag:	#если имя мужское
+					if Names["Man"].get(p.normal_form) is None:	# ищем в нормальной форме мужское имя
+						# в словаре Man, если его нет
+						Names["Man"].update({p.normal_form:1}) #то добавляем его в словарь Man со значением 1
+					else:	#иначе
+						Names["Man"][p.normal_form]+=1	#инкрементируем значение
+				if "femn" in p.tag:	#если имя женское
+					if Names["female"].get(p.normal_form) is None:	# ищем в нормальной форме женское имя
+						# в словаре female, если его нет
+						Names["female"].update({p.normal_form:1}) #то добавляем его в словарь
+					#female со значением 1
+					else:	#иначе
+						Names["female"][p.normal_form]+=1	#инкрементируем значение
 			
 print(Names)	#выводим данные из Словаря
