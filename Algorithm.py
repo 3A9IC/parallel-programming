@@ -45,4 +45,18 @@ for sentence in st.sentences_from_text(text):	#выделяем из текст�
 					else:	#иначе
 						Names["female"][p.normal_form]+=1	#инкрементируем значение
 			
-print(Names)	#выводим данные из Словаря
+maxM=0
+maxF=0
+
+for word in Names["Man"]:
+	if Names["Man"][word]>maxM:
+		maxM=Names["Man"][word]
+		B=word	
+for word in Names["female"]:
+	if Names["female"][word]>maxF:
+		maxF=Names["female"][word]
+		A=word
+#print(B," ", maxM, " ", A, " ", maxF)
+#print(Names)
+
+print(B," и ", A)
