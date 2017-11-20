@@ -45,18 +45,18 @@ for sentence in st.sentences_from_text(text):	#выделяем из текст�
 					else:	#иначе
 						Names["female"][p.normal_form]+=1	#инкрементируем значение
 			
-maxM=0
-maxF=0
+maxM=0 # Объявляем переменную maxM с значением 0
+maxF=0 # Объявляем переменную maxF с значением 0
 
-for word in Names["Man"]:
-	if Names["Man"][word]>maxM:
-		maxM=Names["Man"][word]
-		B=word	
-for word in Names["female"]:
-	if Names["female"][word]>maxF:
-		maxF=Names["female"][word]
-		A=word
+for word in Names["Man"]: # пробегаем по мужским именам
+	if Names["Man"][word]>maxM: # если количество вхождений этого слова > maxM
+		maxM=Names["Man"][word] # то к maxM присваиваем это количество
+		B=word	# запоминаем в B это слово
+for word in Names["female"]: # пробегаем по женским именам
+	if Names["female"][word]>maxF: # если количество вхождений этого слова > maxF
+		maxF=Names["female"][word] # то к maxF присваиваем это количество
+		A=word # запоминаем в A это слово
 #print(B," ", maxM, " ", A, " ", maxF)
 #print(Names)
 
-print(B," и ", A)
+print(B," и ", A) # Выводим B и A
