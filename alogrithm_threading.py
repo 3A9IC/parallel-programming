@@ -28,7 +28,22 @@ Kx= list(text_)
 
 
 def sentence_paral():
-  pass #!!!!!!!!!!!!!!!!!!!!!!! Написать функцию для решения задачи!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	_Kx = q.get()
+	for k in _Kx:
+		xNames = text_[k]
+		for word in wt.tokenize(xNames):
+			for p in ma.parse(word):
+				if "Name" in p.tag and p.score>=0.4:
+					if "masc" in p.tag:
+						if Names["Man"].get(p.normal_form) is None:
+							Names["Man"].update({p.normal_form:1})
+						else:
+							Names["Man"][p.normal_form]+=1
+					if "femn" in p.tag:
+						if Names["female"].get(p.normal_form) is None:
+							Names["female"].update({p.normal_form:1})
+						else:
+							Names["female"][p.normal_form]+=1
 F = [sentence_paral, sentence_paral,sentence_paral,sentence_paral]
 d = int(lenS/len(F))
 n,m = 0,d
