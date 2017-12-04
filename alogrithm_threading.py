@@ -47,34 +47,34 @@ def sentence_paral(): #функция
 													#female со значением 1
 						else:#иначе
 							Names["female"][p.normal_form]+=1#инкрементируем значение
-F = [sentence_paral, sentence_paral,sentence_paral,sentence_paral] # создаем переменную F с списком из функций
-d = int(lenS/len(F)) # считаем количество предложений разбитых равно на 4 процесса 
+N = 4 # задаем количество процессов
+d = int(lenS/N) # считаем количество предложений разбитых равно на 4 процесса 
 n,m = 0,d # создаем промежутки из этих предложений
-T = [] #!!!!!!!
+T = [] # пустой список
 
-for f in F: #цикл по функциям
+for f in range(0,N): #цикл по N
 	test=range(n,m) # заносим в test промежуток из значеий от n до m
 	q.put(test) # заносим значения из test в очередь q
-	t = Thread(target = f) #!!!!!!!!
-	t.start()
-	n+=d
-	m+=d
-	T+=[t]
+	t = Thread(target = sentence_paral) #выбираем цель threding'a - функцию
+	t.start() # запускаем метод start()
+	n+=d # увеличиваем промежутки
+	m+=d # увеличиваем промежутки
+	T+=[t] # заносим в список t
 
 for t in T:
-	t.join()
+	t.join() # вызываем метод join
 
-maxM=0
-maxF=0
+maxM=0 # в maxM присваиваем 0
+maxF=0 # в maxF присваиваем 0
 
-for word in Names["Man"]:
-	if Names["Man"][word]>maxM:
-		maxM=Names["Man"][word]
-		B=word	
-for word in Names["female"]:
-	if Names["female"][word]>maxF:
-		maxF=Names["female"][word]
-		A=word
+for word in Names["Man"]: # бежим по словам из мужского словарика
+	if Names["Man"][word]>maxM: # если количество вхождение этого слова больше maxM
+		maxM=Names["Man"][word] # присваиваем в maxM это количество
+		B=word	# записываем в В это имя
+for word in Names["female"]: # бежим по словам из женского словарика
+	if Names["female"][word]>maxF: # если количество вхождение этого слова больше maxF
+		maxF=Names["female"][word] # присваиваем в maxF это количество
+		A=word # записываем в A это имя
 #print(Names)
 
-print(B," и ", A)
+print(B," и ", A) # Вывод имен
