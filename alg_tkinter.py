@@ -9,7 +9,7 @@ from nltk.tokenize import PunktSentenceTokenizer as PST
 from nltk.tokenize import WordPunctTokenizer as WPT
 from time import time, sleep
 
-root = Tk()
+root = Tk()	#обозначаем переменную root как класс tkinter
 ma = MA()
 st = PST()
 wt = WPT()
@@ -65,12 +65,12 @@ n,m = 0,d
 for f in range(N):
 	test=range(n,m)
 	q.put(test)
-	root.after(1,sentence_paral)
+	root.after(1,sentence_paral)	#запустить sentence_paral через 1 милисекунду
 	n+=d
 	m+=d
 
-	
-root.mainloop()
+
+root.mainloop()		#используем функцию mainloop для создания окна
 
 
 
